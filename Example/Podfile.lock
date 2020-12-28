@@ -1,0 +1,27 @@
+PODS:
+  - LKFoundation (0.1.0)
+  - LKPayment (0.1.0):
+    - LKFoundation
+
+DEPENDENCIES:
+  - LKFoundation (from `https://github.com/honeyluka/LKFoundation.git`)
+  - LKPayment (from `../`)
+
+EXTERNAL SOURCES:
+  LKFoundation:
+    :git: https://github.com/honeyluka/LKFoundation.git
+  LKPayment:
+    :path: "../"
+
+CHECKOUT OPTIONS:
+  LKFoundation:
+    :commit: 0a515bbe6509f3a22ce0b39091edaffb83e7bdb9
+    :git: https://github.com/honeyluka/LKFoundation.git
+
+SPEC CHECKSUMS:
+  LKFoundation: 30ef629d95782c697f9e29ee3d5bb221337c833c
+  LKPayment: 4d5c4dc823ace3e676e0a63f0e4ff5e11cccaea5
+
+PODFILE CHECKSUM: a3b0ceb3d6850a088840cbf2d827d1b310e5a61a
+
+COCOAPODS: 1.10.0
