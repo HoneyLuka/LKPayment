@@ -7,6 +7,7 @@
 //
 
 @import XCTest;
+#import <LKPayment/LKPayment.h>
 
 @interface Tests : XCTestCase
 
@@ -26,9 +27,19 @@
     [super tearDown];
 }
 
-- (void)testExample
+//- (void)testExample
+//{
+//    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+//}
+
+- (void)testErrorLog
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    LKPaymentErrorLog(@"test %@ log", @"error");
+}
+
+- (void)testInfoLog
+{
+    LKPaymentInfoLog(@"test info log");
 }
 
 @end

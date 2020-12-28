@@ -35,7 +35,6 @@
     dispatch_once(&onceToken, ^{
         sManager = [LKPaymentManager new];
     });
-    
     return sManager;
 }
 
@@ -119,7 +118,7 @@
     }
     
     if (response.invalidProductIdentifiers.count) {
-        LKPaymentLog(@"response.invalidProductIdentifiers is not empty");
+        LKPaymentWarningLog(@"response.invalidProductIdentifiers is not empty");
     }
     
     self.status = LKPaymentManagerStatusIdle;
@@ -145,7 +144,7 @@
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
 {
     if (error.code != SKErrorPaymentCancelled) {
-        LKPaymentLog(@"Restore failed, info: %@", error.localizedDescription);
+        LKPaymentErrorLog(@"Restore failed, info: %@", error.localizedDescription);
     }
     
     self.status = LKPaymentManagerStatusIdle;
@@ -159,7 +158,7 @@
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
 {
-    LKPaymentLog(@"All restorable transactions have been processed by the payment queue.");
+    LKPaymentInfoLog(@"All restorable transactions have been processed by the payment queue.");
     
     self.status = LKPaymentManagerStatusIdle;
     
@@ -191,7 +190,7 @@
 - (void)paymentQueue:(SKPaymentQueue *)queue removedTransactions:(NSArray<SKPaymentTransaction *> *)transactions
 {
     for(SKPaymentTransaction *transaction in transactions) {
-        LKPaymentLog(@"%@ removed from queue", transaction.payment.productIdentifier);
+        LKPaymentInfoLog(@"%@ removed from queue", transaction.payment.productIdentifier);
     }
 }
 
@@ -201,26 +200,26 @@
         switch (transaction.transactionState) {
             case SKPaymentTransactionStatePurchasing:
             {
-                LKPaymentLog(@"%@ Purchasing", transaction.payment.productIdentifier);
+                LKPaymentInfoLog(@"%@ Purchasing", transaction.payment.productIdentifier);
             }
                 break;
             case SKPaymentTransactionStateDeferred:
             {
-                LKPaymentLog(@"%@ Deferred", transaction.payment.productIdentifier);
+                LKPaymentInfoLog(@"%@ Deferred", transaction.payment.productIdentifier);
             }
                 break;
             case SKPaymentTransactionStatePurchased:
             {
-                LKPaymentLog(@"%@ Purchased", transaction.payment.productIdentifier);
+                LKPaymentInfoLog(@"%@ Purchased", transaction.payment.productIdentifier);
                 [self handleSuccessTransaction:transaction];
             }
                 break;
             case SKPaymentTransactionStateFailed:
             {
                 if (transaction.error.code == SKErrorPaymentCancelled) {
-                    LKPaymentLog(@"%@ Cancelled", transaction.payment.productIdentifier);
+                    LKPaymentInfoLog(@"%@ Cancelled", transaction.payment.productIdentifier);
                 } else {
-                    LKPaymentLog(@"%@ Failed, info: %@", transaction.payment.productIdentifier, transaction.error);
+                    LKPaymentErrorLog(@"%@ Failed, info: %@", transaction.payment.productIdentifier, transaction.error);
                 }
                 
                 [self handleFailedTransaction:transaction error:transaction.error];
@@ -228,7 +227,7 @@
                 break;
             case SKPaymentTransactionStateRestored:
             {
-                LKPaymentLog(@"%@ Restored", transaction.payment.productIdentifier);
+                LKPaymentInfoLog(@"%@ Restored", transaction.payment.productIdentifier);
                 [self handleRestoredTransaction:transaction];
             }
                 break;

@@ -8,7 +8,9 @@
 #ifndef LKPaymentDefines_h
 #define LKPaymentDefines_h
 
-#define LKPaymentLog(fmt, ...) NSLog((@"LKPayment: " fmt), ##__VA_ARGS__)
+#define LKPaymentInfoLog(fmt, ...) LKLogInfo(@"LKPayment", nil, fmt, ##__VA_ARGS__)
+#define LKPaymentWarningLog(fmt, ...) LKLogWarning(@"LKPayment", nil, fmt, ##__VA_ARGS__)
+#define LKPaymentErrorLog(fmt, ...) LKLogError(@"LKPayment", nil, fmt, ##__VA_ARGS__)
 
 typedef NS_ENUM(NSUInteger, LKPaymentManagerStatus) {
     LKPaymentManagerStatusIdle,

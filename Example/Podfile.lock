@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   LKFoundation:
-    :commit: 0a515bbe6509f3a22ce0b39091edaffb83e7bdb9
+    :commit: 9aa3ebdac8cc14d29e5aa97bf33c188a615e2705
     :git: https://github.com/honeyluka/LKFoundation.git
 
 SPEC CHECKSUMS:
